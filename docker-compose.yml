@@ -5,7 +5,19 @@ services:
     build: .
     container_name: static_nginx_site
     ports:
-      - "3000:80"  # host:container
+      - "3000:80"
     volumes:
       - .:/usr/share/nginx/html
     restart: always
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: devops_jenkins
+    ports:
+      - "8090:8080"   # host:container
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    restart: always
+
+volumes:
+  jenkins_home:
