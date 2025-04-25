@@ -11,7 +11,9 @@ services:
     restart: always
 
   jenkins:
-    image: jenkins/jenkins:lts
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins  # Reference the custom Jenkins Dockerfile
     container_name: devops_jenkins
     ports:
       - "9000:8080"   # host:container
