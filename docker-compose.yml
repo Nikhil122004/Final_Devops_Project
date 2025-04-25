@@ -14,7 +14,7 @@ services:
     image: jenkins/jenkins:lts
     container_name: devops_jenkins
     ports:
-      - "8090:8080"   # host:container
+      - "9000:8080"   # host:container
     volumes:
       - jenkins_home:/var/jenkins_home
     restart: always
