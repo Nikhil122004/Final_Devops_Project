@@ -14,7 +14,7 @@ pipeline {
                 echo "🧹 Stopping any running containers..."
                 docker compose down
 
-                echo "🚀 Building and starting containers..."
+                echo "🚀 Starting containers..."
                 docker compose up -d --build
                 '''
             }
@@ -22,11 +22,8 @@ pipeline {
     }
 
     post {
-        success {
-            echo "✅ App deployed successfully!"
-        }
         failure {
-            echo "❌ Deployment failed. Check the logs above."
+            echo '❌ Deployment failed. Check the logs above.'
         }
     }
 }
