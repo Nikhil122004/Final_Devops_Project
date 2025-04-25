@@ -10,15 +10,24 @@ pipeline {
 
         stage('Build & Deploy with Docker Compose') {
             steps {
-                sh '''
-                echo "Stopping containers..."
-                docker compose down
+                script {
+                    echo "Stopping existing containers..."
+                    sh 'docker compose down'
 
-                echo "Rebuilding and starting containers..."
-                docker compose up --build -d
+                    echo "Rebuilding and starting containers..."
+                    sh 'docker compose up --build -d'
 
-                '''
+                    echo "Deployment completed!"
+                }
             }
+        }
+    }
+    post {
+        success {
+            echo "Pipeline executed successfully!"
+        }
+        failure {
+            echo "Pipeline failed. Check logs for errors."
         }
     }
 }
