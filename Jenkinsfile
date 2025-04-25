@@ -12,10 +12,11 @@ pipeline {
             steps {
                 sh '''
                 echo "Stopping containers..."
-                docker-compose down
+                docker compose down
 
                 echo "Rebuilding and starting containers..."
-                docker-compose up --build -d
+                docker compose up --build -d
+
                 '''
             }
         }
