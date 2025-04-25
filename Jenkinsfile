@@ -2,32 +2,31 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repository') {
+        stage('Pull Latest Code') {
             steps {
                 git 'https://github.com/Nikhil122004/Final_Devops_Project.git'
             }
         }
 
-        stage('Build & Deploy with Docker Compose') {
+        stage('Deploy App with Docker Compose') {
             steps {
-                script {
-                    echo "Stopping existing containers..."
-                    sh 'docker compose down'
+                sh '''
+                echo "🧹 Stopping any running containers..."
+                docker compose down
 
-                    echo "Rebuilding and starting containers..."
-                    sh 'docker compose up --build -d'
-
-                    echo "Deployment completed!"
-                }
+                echo "🚀 Building and starting containers..."
+                docker compose up -d --build
+                '''
             }
         }
     }
+
     post {
         success {
-            echo "Pipeline executed successfully!"
+            echo "✅ App deployed successfully!"
         }
         failure {
-            echo "Pipeline failed. Check logs for errors."
+            echo "❌ Deployment failed. Check the logs above."
         }
     }
 }
