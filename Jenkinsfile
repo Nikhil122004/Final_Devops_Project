@@ -10,14 +10,14 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t final_devops_project_image .'
+                bat 'docker build -t final_devops_project_image .'
             }
         }
 
         stage('Deploy using Docker Compose') {
             steps {
-                sh '''
-                docker-compose down || true
+                bat '''
+                docker-compose down || exit 0
                 docker-compose up -d --build
                 '''
             }
