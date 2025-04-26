@@ -11,9 +11,9 @@ pipeline {
         stage('Deploy App with Docker Compose') {
             steps {
                 script{
-                    bat 'docker-compose down || true'
-                    bat 'docker-compose pull'
-                   bat 'docker-compose up -d'
+                    sh 'docker-compose down || true'
+                    sh 'docker-compose pull'
+                    sh 'docker-compose up -d'
                 }
             }
         }
